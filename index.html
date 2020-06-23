@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="EN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Single pong! v2</title>
+    <style type="text/css">
+      body {
+        text-align: center;
+      }
+      canvas {
+        border: 10px solid #bbb;
+        background-color: #eee;
+        display: inline-block;
+      }
+      a { display: block;}
+    </style>
+  </head>
+  <body>
+    <canvas id="cv" width="800" height="600"></canvas>
+    <a id="lnkSoundHandler">Sound: OFF</a>
+  <script src="bundle.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      pongts.default();
+    });
+  </script>
+</html>
