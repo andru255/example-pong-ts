@@ -12,6 +12,14 @@ export default abstract class GameEngine {
   layers: LayerStack;
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
+  //animation vars
+  accumulator: number = 0;
+  delta: number = 1e3 / 60;
+  step: number = 1 / 60;
+  last: number = 0;
+  now: number;
+  dt: number = 0;
+
   abstract getFeatures(): {};
 
   init(): void {}
@@ -25,8 +33,18 @@ export default abstract class GameEngine {
 
     this.drawFrame = () => {
       this.animationLoop = window.requestAnimationFrame(this.drawFrame);
+      this.now = performance.now();
+      this.dt = this.now - this.last;
+      this.last = this.now;
+      if (this.dt > 1e3) {
+        return;
+      }
+      this.accumulator += this.dt;
+      while (this.accumulator >= this.delta) {
+        this.layers.runLayersWithMethod("update", this.getFeatures());
+        this.accumulator -= this.delta;
+      }
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.layers.runLayersWithMethod("update", this.getFeatures());
       this.layers.runLayersWithMethod("render", this.getFeatures());
     };
 

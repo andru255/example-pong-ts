@@ -11,7 +11,9 @@ export default class Game extends GameEngine {
 
   getFeatures() {
     return {
+      dt: this.step,
       canvas: this.canvas,
+      ctx: this.ctx,
       name: "PONGV2",
       layers: this.layers.getLayers(),
       start: this.start,

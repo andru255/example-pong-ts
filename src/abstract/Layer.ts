@@ -4,8 +4,10 @@ export abstract class Layer {
   width: number = 0;
   height: number = 0;
   isCircular: boolean = false;
-  fillColor: string = "#0f0";
-  strokeColor: string = "#00f";
+  fillStyle: string = "#0f0";
+  strokeStyle: string = "#00f";
+  vx: number = 0;
+  vy: number = 0;
 
   abstract start(gameFeatures): void;
   abstract update(gameFeatures): void;
