@@ -22,6 +22,9 @@ export abstract class Layer {
   accY?: number = 0;
   // rotation
   rotation?: number = 0;
+  // font
+  font?: string = "20px arial, sans-serif";
+  text?: string = "";
 
   abstract start?(gameFeatures): void;
   abstract update?(gameFeatures): void;

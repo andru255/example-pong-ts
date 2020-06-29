@@ -13,3 +13,16 @@ export function rectangleFixture(layer: Layer, gf: any) {
   }
   ctx.restore();
 }
+
+export function textFixture(layer: Layer, gf: any) {
+  const ctx = <CanvasRenderingContext2D>gf.ctx;
+  ctx.save();
+  ctx.beginPath();
+  ctx.font = layer.font;
+  ctx.strokeStyle = layer.strokeStyle;
+  ctx.fillStyle = layer.fillStyle;
+  ctx.fillText(layer.text, layer.x, layer.y);
+  ctx.stroke();
+  ctx.fill();
+  ctx.restore();
+}

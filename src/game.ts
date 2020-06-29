@@ -28,7 +28,7 @@ export class Game extends GameEngine {
       name: "PONGV2",
       layers: this.layers.getLayers(),
       start: this.start,
-      stop: this.stop,
+      stop: () => this.stop(),
       restart: this.restart,
     };
   }

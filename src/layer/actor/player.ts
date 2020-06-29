@@ -1,7 +1,7 @@
 import { KeyName, Keyboard } from "../../Keyboard";
 
 import { Layer } from "../../abstract/layer";
-import { rectangleFixture } from "../../Fixture";
+import { rectangleFixture, textFixture } from "../../Fixture";
 import Easing from "../../../Easing";
 import Color, { linearColor } from "../../../Color";
 import { GameFeatures } from "../../game";
@@ -16,12 +16,12 @@ export default class PlayerActor extends Layer {
 
   //ripple effect
   needsRipple = false;
-  private rippleDuration = 2;
+  private rippleDuration = 0.5;
   private initalRadius = 0;
-  private radiusMax = 50;
-  private rippleColor = "#ffffffbb";
-  private defaultRipleColor = "#ffffffbb";
-  private targetRipleColor = "#BC7593";
+  private radiusMax = 150;
+  private rippleColor = "#ffffff00";
+  private defaultRipleColor = "#ffffff00";
+  private targetRippleColor = "#BC7593ff";
   private initialFillStyle: string;
 
   constructor() {
@@ -34,9 +34,9 @@ export default class PlayerActor extends Layer {
     this.accY = 2;
   }
 
-  start(gs) {
+  start(gf: GameFeatures) {
     this.initialFillStyle = "#BC7593";
-    this.y = gs.canvas.height / 2 - this.height / 2;
+    this.y = gf.canvas.height / 2 - this.height / 2;
     const released = () => {
       this.isPresedUp = false;
       this.isPresedDown = false;
@@ -54,9 +54,9 @@ export default class PlayerActor extends Layer {
     this.fillStyle = this.initialFillStyle;
   }
 
-  update(gs: GameFeatures) {
-    this.checkBounds(gs);
-    this.checkCollisionWithBall(gs);
+  update(gf: GameFeatures) {
+    this.checkBounds(gf);
+    this.checkCollisionWithBall(gf);
     if (this.isPresedUp) {
       this.vy -= this.accY;
     }
@@ -66,12 +66,41 @@ export default class PlayerActor extends Layer {
     this.vy *= this.friction;
     this.y += this.vy;
     if (this.needsRipple) {
-      this.rippleAnimation(gs, () => (this.needsRipple = false));
+      this.rippleAnimation(gf, () => gf.stop());
     }
   }
 
-  render(gs) {
-    rectangleFixture(this, gs);
+  render(gf) {
+    rectangleFixture(this, gf);
+    //this.fadeIn(gf);
+    textFixture(
+      {
+        x: this.x + this.width / 2,
+        y: this.y + this.height / 2,
+        width: 300,
+        height: 300,
+        font: "30px arial",
+        fillStyle: "#f00000",
+        text: JSON.stringify(Color.HexToRGBA(this.rippleColor)),
+      },
+      gf
+    );
+    textFixture(
+      {
+        x: this.x + this.width / 2,
+        y: this.y + this.height,
+        width: 300,
+        height: 300,
+        font: "30px arial",
+        fillStyle: "#f0f",
+        text: JSON.stringify(Color.HexToRGBA(this.targetRippleColor)),
+      },
+      gf
+    );
+    //rectangleFixture(
+    //  { x: 10, y: 10, width: 300, height: 300, fillStyle: "#f00" },
+    //  gf
+    //);
   }
 
   private checkBounds(gs) {
@@ -102,6 +131,14 @@ export default class PlayerActor extends Layer {
     return angle / 2;
   }
 
+  private fadeIn(gf: GameFeatures) {
+    const init = Color.HexToRGBA(this.rippleColor);
+    const finish = Color.HexToRGBA(this.targetRippleColor);
+    const anim = linearColor(gf.dt, init, finish, 3);
+    this.rippleColor = Color.RGBAtoHEX(anim);
+    this.fillStyle = this.rippleColor;
+  }
+
   private rippleAnimation(gf: GameFeatures, ending: () => void) {
     this.initalRadius = Easing.linear(
       gf.dt,
@@ -110,7 +147,7 @@ export default class PlayerActor extends Layer {
       this.rippleDuration
     );
     const objRippleColor = Color.HexToRGBA(this.rippleColor);
-    const objRippleColorTarget = Color.HexToRGBA(this.targetRipleColor);
+    const objRippleColorTarget = Color.HexToRGBA(this.targetRippleColor);
     const linearColorToHex = linearColor(
       gf.dt,
       objRippleColor,
@@ -118,13 +155,12 @@ export default class PlayerActor extends Layer {
       this.rippleDuration
     );
     this.rippleColor = Color.RGBAtoHEX(linearColorToHex);
-    if (Math.round(this.initalRadius) == this.radiusMax) {
-      console.log("alphas", this.rippleColor);
+    if (Math.floor(this.initalRadius) == this.radiusMax) {
       this.initalRadius = 0;
-      //if (objRippleColor.alpha - objRippleColorTarget.alpha < 0.001) {
-      //  this.rippleColor = this.defaultRipleColor;
-      //  ending();
-      //}
+      if (objRippleColorTarget.alpha - objRippleColor.alpha < 0.3) {
+        this.rippleColor = this.defaultRipleColor;
+        ending();
+      }
     }
 
     var x0 = this.width;

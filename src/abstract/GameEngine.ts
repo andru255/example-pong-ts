@@ -42,10 +42,10 @@ export default abstract class GameEngine {
       this.accumulator += this.dt;
       while (this.accumulator >= this.delta) {
         this.layers.runLayersWithMethod("update", this.getFeatures());
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.layers.runLayersWithMethod("render", this.getFeatures());
         this.accumulator -= this.delta;
       }
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.layers.runLayersWithMethod("render", this.getFeatures());
     };
 
     if (this.loopStatus == LoopStatus.Started) {
@@ -65,6 +65,7 @@ export default abstract class GameEngine {
   stop() {
     this.loopStatus = LoopStatus.Stopped;
     window.cancelAnimationFrame(this.animationLoop);
+    console.log("status", this.loopStatus);
   }
 
   restart() {

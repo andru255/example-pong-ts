@@ -92,9 +92,9 @@ export function linearColor(
     duration
   );
   return {
-    red: Math.round(red),
-    green: Math.round(green),
-    blue: Math.round(blue),
+    red: Math.floor(red),
+    green: Math.floor(green),
+    blue: Math.floor(blue),
     alpha,
   };
 }
