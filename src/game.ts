@@ -1,7 +1,18 @@
 import GameEngine from "./abstract/GameEngine";
 import { LayerStack } from "./LayerStack";
+import { Layer } from "./abstract/layer";
 
-export default class Game extends GameEngine {
+export interface GameFeatures {
+  dt: number;
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  name: string;
+  layers: { [key: string]: Layer };
+  start: () => void;
+  stop: () => void;
+  restart: () => void;
+}
+export class Game extends GameEngine {
   constructor(canvasId) {
     super();
     this.canvas = <HTMLCanvasElement>document.getElementById(canvasId);
@@ -9,7 +20,7 @@ export default class Game extends GameEngine {
     this.layers = new LayerStack();
   }
 
-  getFeatures() {
+  getFeatures(): GameFeatures {
     return {
       dt: this.step,
       canvas: this.canvas,

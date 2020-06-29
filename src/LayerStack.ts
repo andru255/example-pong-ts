@@ -7,7 +7,7 @@ enum LayerStackState {
 
 export class LayerStack {
   currentState: LayerStackState = LayerStackState.Stopped;
-  layers = {};
+  layers: { [key: string]: Layer } = {};
 
   addLayer(name: string, layer: Layer): void {
     this.layers[name] = layer;
@@ -17,7 +17,7 @@ export class LayerStack {
     // TODO
   }
 
-  getLayers() {
+  getLayers(): { [key: string]: Layer } {
     return this.layers;
   }
 
