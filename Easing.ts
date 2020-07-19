@@ -5,7 +5,15 @@ const Easing = {
     change: number,
     duration: number
   ): number => {
-    return change * (time / duration) + begin;
+    const diff = change - begin;
+    const f = time / duration;
+    if (diff > time) {
+      return begin + diff * f;
+    }
+    if (diff < -time) {
+      return begin - (begin - change) * f;
+    }
+    return change;
   },
 };
 export default Easing;

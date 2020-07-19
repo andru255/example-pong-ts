@@ -53,15 +53,11 @@ const HexToRGBA = (hexValue: string): LiteralRGBA => {
 };
 
 const RGBAtoHEX = (literalRGBA: LiteralRGBA): string => {
-  const compact = (value: string) => (value.length == 1 ? `0${value}` : value);
-  const alpha = Math.round(literalRGBA.alpha * 255).toString(16);
-  return [
-    "#",
-    compact(literalRGBA.red.toString(16)),
-    compact(literalRGBA.green.toString(16)),
-    compact(literalRGBA.blue.toString(16)),
-    compact(alpha),
-  ].join("");
+  const red = (literalRGBA.red | (1 << 8)).toString(16).slice(1);
+  const green = (literalRGBA.green | (1 << 8)).toString(16).slice(1);
+  const blue = (literalRGBA.blue | (1 << 8)).toString(16).slice(1);
+  const alpha = ((literalRGBA.alpha * 255) | (1 << 8)).toString(16).slice(1);
+  return `#${red}${green}${blue}${alpha}`;
 };
 // animations
 
@@ -72,30 +68,15 @@ export function linearColor(
   change: LiteralRGBA,
   duration: number
 ): LiteralRGBA {
-  const red = Easing.linear(time, begin.red, change.red - begin.red, duration);
-  const green = Easing.linear(
-    time,
-    begin.green,
-    change.green - begin.green,
-    duration
-  );
-  const blue = Easing.linear(
-    time,
-    begin.blue,
-    change.blue - begin.blue,
-    duration
-  );
-  const alpha = Easing.linear(
-    time,
-    begin.alpha,
-    change.alpha - begin.alpha,
-    duration
-  );
+  const red = Easing.linear(time, begin.red, change.red, duration);
+  const green = Easing.linear(time, begin.green, change.green, duration);
+  const blue = Easing.linear(time, begin.blue, change.blue, duration);
+  const _alpha = Easing.linear(time, begin.alpha, change.alpha, duration);
   return {
-    red: Math.floor(red),
-    green: Math.floor(green),
-    blue: Math.floor(blue),
-    alpha,
+    red,
+    green,
+    blue,
+    alpha: Number(`${Math.round(Number(`${_alpha}e3`))}e-3`),
   };
 }
 

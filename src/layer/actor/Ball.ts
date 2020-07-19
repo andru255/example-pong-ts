@@ -17,7 +17,7 @@ export default class Ball extends Layer {
     this.x = gs.canvas.width / 2;
     this.y = gs.canvas.height / 2;
     this.vx = this.speed;
-    //this.vy = this.speed;
+    this.vy = this.speed;
   }
   update(gf) {
     this.x += this.vx;
