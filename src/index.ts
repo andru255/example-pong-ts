@@ -2,10 +2,12 @@ import BallActor from "./layer/actor/Ball";
 import FPSUI from "./layer/ui/FPS";
 import { Game } from "./game";
 import PlayerActor from "./layer/actor/Player";
+import EnemyActor from "./layer/actor/Enemy";
 
 // actor layers
 const player = new PlayerActor();
 const ball = new BallActor();
+const enemy = new EnemyActor();
 const game = new Game("cv");
 
 //ui layers
@@ -15,6 +17,7 @@ const setup = () => {
   console.log("setup game!");
   game.add("player", player);
   game.add("ball", ball);
+  game.add("enemy", enemy);
   game.add("fps", fps);
 };
 const pong = () => {

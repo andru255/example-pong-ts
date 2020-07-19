@@ -3,7 +3,7 @@ import Easing from "../../../Easing";
 import { GameFeatures } from "../../game";
 import { Layer } from "../../abstract/layer";
 
-export default class PlayerFillStyle {
+export default class PaddleFillStyle {
   defaultfillStyle: string;
   fillStyle: string;
   x0: number = 0;

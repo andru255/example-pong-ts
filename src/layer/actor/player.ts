@@ -3,7 +3,7 @@ import { KeyName, Keyboard } from "../../Keyboard";
 import { Layer } from "../../abstract/layer";
 import { rectangleFixture } from "../../Fixture";
 import { GameFeatures } from "../../game";
-import PlayerFillStyle from "../effect/PlayerFillStyle";
+import PaddleFillStyle from "../effect/PaddleFillStyle";
 
 export default class PlayerActor extends Layer {
   velocityMaxY = 25;
@@ -12,7 +12,7 @@ export default class PlayerActor extends Layer {
   arrowDown = Keyboard(KeyName.ARROW_DOWN);
   isPresedUp = false;
   isPresedDown = false;
-  playerFillStyle: PlayerFillStyle;
+  paddleFillStyle: PaddleFillStyle;
   needsRipple = false;
 
   constructor() {
@@ -24,7 +24,7 @@ export default class PlayerActor extends Layer {
     this.friction = 0.85;
     this.accY = 2;
     this.fillStyle = "#BC7593ff";
-    this.playerFillStyle = new PlayerFillStyle(this.fillStyle);
+    this.paddleFillStyle = new PaddleFillStyle(this.fillStyle);
   }
 
   start(gf: GameFeatures) {
@@ -58,9 +58,9 @@ export default class PlayerActor extends Layer {
     this.y += this.vy;
 
     if (this.needsRipple) {
-      this.fillStyle = this.playerFillStyle.ripple(gf, this);
-      if (this.playerFillStyle.isRippleEnded()) {
-        this.playerFillStyle.reset();
+      this.fillStyle = this.paddleFillStyle.ripple(gf, this);
+      if (this.paddleFillStyle.isRippleEnded()) {
+        this.paddleFillStyle.reset();
         this.needsRipple = false;
       }
     }
@@ -85,7 +85,7 @@ export default class PlayerActor extends Layer {
       ball.vx *= -1;
       ball.rotation *= -1;
       const startPos = this.y - ball.y > 0 ? this.y - ball.y : ball.y - this.y;
-      this.playerFillStyle.setPosition0(this.width, startPos);
+      this.paddleFillStyle.setPosition0(this.width, startPos);
       this.needsRipple = true;
     }
     this.rotation += (0 - this.rotation) * 0.1;

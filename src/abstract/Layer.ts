@@ -1,3 +1,5 @@
+import { GameFeatures } from "../game";
+
 export abstract class Layer {
   // position
   x: number = 0;
@@ -26,9 +28,9 @@ export abstract class Layer {
   font?: string = "20px arial, sans-serif";
   text?: string = "";
 
-  abstract start?(gameFeatures): void;
-  abstract update?(gameFeatures): void;
-  abstract render?(gameFeatures): void;
+  abstract start?(gameFeatures: GameFeatures): void;
+  abstract update?(gameFeatures: GameFeatures): void;
+  abstract render?(gameFeatures: GameFeatures): void;
 
   collideWith?(layer: Layer): boolean {
     const left = this.x + this.width < layer.x;
