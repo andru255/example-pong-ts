@@ -1,18 +1,10 @@
 import { KeyName, Keyboard } from "../../Keyboard";
-
-import { Layer } from "../../abstract/layer";
-import { rectangleFixture } from "../../Fixture";
 import { GameFeatures } from "../../game";
-import PaddleFillStyle from "../effect/PaddleFillStyle";
+import Paddle from "../../abstract/Paddle";
 
-export default class PlayerActor extends Layer {
-  velocityMaxY = 25;
-
+export default class PlayerActor extends Paddle {
   arrowUp = Keyboard(KeyName.ARROW_UP);
   arrowDown = Keyboard(KeyName.ARROW_DOWN);
-  isPresedUp = false;
-  isPresedDown = false;
-  paddleFillStyle: PaddleFillStyle;
   needsRipple = false;
 
   constructor() {
@@ -24,61 +16,34 @@ export default class PlayerActor extends Layer {
     this.friction = 0.85;
     this.accY = 2;
     this.fillStyle = "#BC7593ff";
-    this.paddleFillStyle = new PaddleFillStyle(this.fillStyle);
   }
 
   start(gf: GameFeatures) {
+    super.start(gf);
     this.y = gf.canvas.height / 2 - this.height / 2;
     const released = () => {
-      this.isPresedUp = false;
-      this.isPresedDown = false;
+      this.isMoveUp = false;
+      this.isMoveDown = false;
     };
     this.arrowUp.press = () => {
-      this.isPresedUp = true;
-      this.isPresedDown = false;
+      this.isMoveUp = true;
+      this.isMoveDown = false;
     };
     this.arrowUp.release = released;
     this.arrowDown.press = () => {
-      this.isPresedUp = false;
-      this.isPresedDown = true;
+      this.isMoveUp = false;
+      this.isMoveDown = true;
     };
     this.arrowDown.release = released;
   }
 
   update(gf: GameFeatures) {
-    this.checkBounds(gf);
     this.checkCollisionWithBall(gf);
-    if (this.isPresedUp) {
-      this.vy -= this.accY;
-    }
-    if (this.isPresedDown) {
-      this.vy += this.accY;
-    }
-    this.vy *= this.friction;
-    this.y += this.vy;
-
-    if (this.needsRipple) {
-      this.fillStyle = this.paddleFillStyle.ripple(gf, this);
-      if (this.paddleFillStyle.isRippleEnded()) {
-        this.paddleFillStyle.reset();
-        this.needsRipple = false;
-      }
-    }
+    super.update(gf);
   }
 
-  render(gf) {
-    rectangleFixture(this, gf);
-  }
-
-  private checkBounds(gs) {
-    var maxY = Math.max(0, this.y);
-    this.y = maxY;
-    var minY = Math.min(gs.canvas.height - this.height, this.y);
-    this.y = minY;
-  }
-
-  private checkCollisionWithBall(gf) {
-    var ball = <Layer>gf.layers.ball;
+  private checkCollisionWithBall(gf: GameFeatures) {
+    var ball = gf.layers.ball;
     if (this.collideWith(ball)) {
       this.rotation = this.getCollisionAngle(ball);
       ball.x = this.x + this.width;
@@ -89,14 +54,5 @@ export default class PlayerActor extends Layer {
       this.needsRipple = true;
     }
     this.rotation += (0 - this.rotation) * 0.1;
-  }
-
-  private getCollisionAngle(ball: Layer): number {
-    const factor = -(Math.PI * 0.35);
-    const diffBallYPaddleY = ball.y + ball.height - this.y;
-    const sumPaddleHAndBallH = this.height + ball.height;
-    const angle =
-      factor + (diffBallYPaddleY / sumPaddleHAndBallH) * Math.PI * 0.7;
-    return angle / 2;
   }
 }

@@ -4,8 +4,8 @@ import { GameFeatures } from "../../game";
 import { Layer } from "../../abstract/layer";
 
 export default class PaddleFillStyle {
-  defaultfillStyle: string;
-  fillStyle: string;
+  defaultfillStyle: string | CanvasGradient;
+  fillStyle: string | CanvasGradient;
   x0: number = 0;
   y0: number = 0;
 
@@ -62,7 +62,7 @@ export default class PaddleFillStyle {
     var rad1 = rad0 + 1;
     var gradient = gf.ctx.createRadialGradient(x0, y0, rad0, x1, y1, rad1);
     gradient.addColorStop(0, this.rippleColor);
-    gradient.addColorStop(1, this.defaultfillStyle);
+    gradient.addColorStop(1, <string>this.defaultfillStyle);
     return gradient;
   }
 }
