@@ -28,6 +28,9 @@ export abstract class Layer {
   font?: string = "20px arial, sans-serif";
   text?: string = "";
 
+  //data shared
+  shared?: any = {};
+
   abstract start?(gameFeatures: GameFeatures): void;
   abstract update?(gameFeatures: GameFeatures): void;
   abstract render?(gameFeatures: GameFeatures): void;

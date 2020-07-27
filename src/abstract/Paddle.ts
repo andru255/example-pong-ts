@@ -7,11 +7,16 @@ export default class Paddle extends Layer {
   velocityMaxY = 25;
   isMoveUp = false;
   isMoveDown = false;
+  rippleColor = "#ffffff";
   paddleFillStyle: PaddleFillStyle;
   needsRipple = false;
+  score = 0;
 
   public start(gf: GameFeatures) {
-    this.paddleFillStyle = new PaddleFillStyle(<string>this.fillStyle);
+    this.paddleFillStyle = new PaddleFillStyle(
+      <string>this.fillStyle,
+      this.rippleColor
+    );
   }
 
   update(gf: GameFeatures) {

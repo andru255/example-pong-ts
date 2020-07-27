@@ -12,6 +12,8 @@ export default abstract class GameEngine {
   layers: LayerStack;
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
+  data: any;
+
   //animation vars
   accumulator: number = 0;
   delta: number = 1e3 / 60;
@@ -65,7 +67,6 @@ export default abstract class GameEngine {
   stop() {
     this.loopStatus = LoopStatus.Stopped;
     window.cancelAnimationFrame(this.animationLoop);
-    console.log("status", this.loopStatus);
   }
 
   restart() {

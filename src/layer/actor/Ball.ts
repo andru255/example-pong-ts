@@ -1,5 +1,6 @@
 import { Layer } from "../../abstract/layer";
 import { rectangleFixture } from "../../Fixture";
+import Paddle from "../../abstract/Paddle";
 
 export default class Ball extends Layer {
   speed = 5;
@@ -12,6 +13,7 @@ export default class Ball extends Layer {
     this.bounce = -1;
     this.width = this.radius * 2;
     this.height = this.radius * 2;
+    this.shared = { player: 0, enemy: 0 };
   }
   start(gs) {
     this.x = gs.canvas.width / 2;
@@ -51,10 +53,18 @@ export default class Ball extends Layer {
   }
 
   private checkBounds(gf) {
+    const player = <Paddle>gf.layers.player;
+    const enemy = <Paddle>gf.layers.enemy;
+
     if (this.y <= 0 || this.y + this.radius * 2 > gf.canvas.height) {
       this.vy *= this.bounce;
     }
-    if (this.x <= 0 || this.x + this.radius * 2 > gf.canvas.width) {
+    if (this.x <= 0) {
+      enemy.score += 1;
+      this.vx *= this.bounce;
+    }
+    if (this.x + this.radius * 2 > gf.canvas.width) {
+      player.score += 1;
       this.vx *= this.bounce;
     }
   }

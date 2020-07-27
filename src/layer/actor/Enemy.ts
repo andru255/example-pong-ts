@@ -8,7 +8,8 @@ export default class EnemyActor extends Paddle {
     this.accY = 2;
     this.vy = 0;
     this.friction = 0.85;
-    this.fillStyle = "#000fff";
+    this.fillStyle = "#FFFFC6";
+    this.rippleColor = "#000";
   }
 
   start(gf: GameFeatures) {

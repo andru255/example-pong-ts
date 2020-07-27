@@ -13,16 +13,20 @@ export default class PaddleFillStyle {
   private rippleDuration = 0.3;
   private radius = 0;
   private radiusMax = 150;
-  private defaultRippleColor = "#ffffff00";
+  private defaultRippleColor = "#ffffff";
   private rippleColor: string;
   private fillStyleRGBA: LiteralRGBA;
   private rippleColorRGBA: LiteralRGBA;
 
-  constructor(fillStyle: string) {
+  constructor(fillStyle: string, rippleColor?: string) {
     this.fillStyle = fillStyle;
     this.defaultfillStyle = fillStyle;
     this.fillStyleRGBA = Color.HexToRGBA(this.defaultfillStyle);
     this.rippleColor = this.defaultRippleColor;
+    if (rippleColor) {
+      this.rippleColor = rippleColor;
+      this.defaultRippleColor = rippleColor;
+    }
     this.rippleColorRGBA = Color.HexToRGBA(this.rippleColor);
   }
 

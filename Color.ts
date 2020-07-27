@@ -80,6 +80,15 @@ export function linearColor(
   };
 }
 
+export function isEqualToRGBA(a: LiteralRGBA, b: LiteralRGBA) {
+  return (
+    a.red == b.red &&
+    a.green == b.green &&
+    a.blue == b.blue &&
+    a.alpha == b.alpha
+  );
+}
+
 const Color = {
   HexToRGBA: HexToRGBA,
   RGBAtoHEX: RGBAtoHEX,

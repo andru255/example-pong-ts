@@ -1,6 +1,7 @@
 import { KeyName, Keyboard } from "../../Keyboard";
 import { GameFeatures } from "../../game";
 import Paddle from "../../abstract/Paddle";
+import Ball from "./Ball";
 
 export default class PlayerActor extends Paddle {
   arrowUp = Keyboard(KeyName.ARROW_UP);
@@ -43,12 +44,12 @@ export default class PlayerActor extends Paddle {
   }
 
   private checkCollisionWithBall(gf: GameFeatures) {
-    var ball = gf.layers.ball;
+    var ball = <Ball>gf.layers.ball;
     if (this.collideWith(ball)) {
       this.rotation = this.getCollisionAngle(ball);
       ball.x = this.x + this.width;
-      ball.vx *= -1;
-      ball.rotation *= -1;
+      ball.vx *= ball.bounce;
+      ball.rotation *= ball.bounce;
       const startPos = this.y - ball.y > 0 ? this.y - ball.y : ball.y - this.y;
       this.paddleFillStyle.setPosition0(this.width, startPos);
       this.needsRipple = true;

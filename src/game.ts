@@ -8,6 +8,7 @@ export interface GameFeatures {
   ctx: CanvasRenderingContext2D;
   name: string;
   layers: { [key: string]: Layer };
+  data?: any;
   start: () => void;
   stop: () => void;
   restart: () => void;
