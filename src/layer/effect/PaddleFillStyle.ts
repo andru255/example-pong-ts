@@ -1,7 +1,7 @@
 import Color, { LiteralRGBA, linearColor } from "../../Color";
 import Easing from "../../Easing";
 import { GameFeatures } from "../../game";
-import { Layer } from "../../abstract/layer";
+import { Layer } from "../../abstract/Layer";
 
 export default class PaddleFillStyle {
   defaultfillStyle: string | CanvasGradient;

@@ -1,4 +1,4 @@
-import { Layer } from "./abstract/layer";
+import { Layer } from "@abstract/layer";
 
 export function rectangleFixture(layer: Layer, gf: any) {
   const ctx = <CanvasRenderingContext2D>gf.ctx;

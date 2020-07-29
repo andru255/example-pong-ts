@@ -1,4 +1,4 @@
-import { Layer } from "../../abstract/layer";
+import { Layer } from "@abstract/layer";
 import { rectangleFixture } from "../../Fixture";
 import Paddle from "../../abstract/Paddle";
 

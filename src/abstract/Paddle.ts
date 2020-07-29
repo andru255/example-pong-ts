@@ -1,4 +1,4 @@
-import { Layer } from "./layer";
+import { Layer } from "@abstract/layer";
 import { rectangleFixture } from "../Fixture";
 import { GameFeatures } from "../game";
 import PaddleFillStyle from "../layer/effect/PaddleFillStyle";

@@ -1,5 +1,5 @@
 import { GameFeatures } from "../../game";
-import { Layer } from "../../abstract/layer";
+import { Layer } from "@abstract/layer";
 import { textFixture } from "../../Fixture";
 import Paddle from "../../abstract/Paddle";
 import Easing from "../../Easing";

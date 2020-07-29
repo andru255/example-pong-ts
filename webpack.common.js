@@ -2,6 +2,7 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WriteFilePlugin = require("write-file-webpack-plugin");
+const tsconfig = require("./tsconfig.json");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -20,6 +21,9 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      "@abstract": path.resolve(__dirname, "src/abstract"),
+    },
   },
   output: {
     filename: "bundle.js",

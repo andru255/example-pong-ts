@@ -1,6 +1,6 @@
 import GameEngine from "./abstract/GameEngine";
 import { LayerStack } from "./LayerStack";
-import { Layer } from "./abstract/layer";
+import { Layer } from "@abstract/layer";
 
 export interface GameFeatures {
   dt: number;

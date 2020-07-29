@@ -6,7 +6,11 @@
     "outDir": "./lib/",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "typeRoots": ["./node_modules/@types", "./typings"]
+    "typeRoots": ["./node_modules/@types", "./typings"],
+    "baseUrl": ".",
+    "paths": {
+      "@abstract/*": ["src/abstract/*"]
+    }
   },
   "exclude": ["node_modules"]
 }
