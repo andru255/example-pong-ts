@@ -1,6 +1,8 @@
 import Layer from "@abstract/Layer";
 import { rectangleFixture } from "@toolbox/Fixture";
 import Paddle from "@abstract/Paddle";
+import { Random } from "@toolbox/Math";
+import { GameFeatures } from "src/game";
 
 export default class Ball extends Layer {
   speed = 7;
@@ -52,20 +54,29 @@ export default class Ball extends Layer {
     rectangleFixture(opts, gf);
   }
 
-  private checkBounds(gf) {
+  private checkBounds(gf: GameFeatures) {
     const player = <Paddle>gf.layers.player;
     const enemy = <Paddle>gf.layers.enemy;
+    const touchedLeft = this.x <= 0;
+    const touchedRight = this.x + this.radius * 2 > gf.canvas.width;
 
     if (this.y <= 0 || this.y + this.radius * 2 > gf.canvas.height) {
       this.vy *= this.bounce;
     }
-    if (this.x <= 0) {
+
+    if (touchedLeft) {
       enemy.score += 1;
-      this.vx *= this.bounce;
     }
-    if (this.x + this.radius * 2 > gf.canvas.width) {
+
+    if (touchedRight) {
       player.score += 1;
-      this.vx *= this.bounce;
+    }
+
+    if (touchedLeft || touchedRight) {
+      this.vx = Random.fromArray([-this.speed, this.speed]);
+      this.vy = Random.fromArray([-this.speed, this.speed]);
+      this.x = gf.canvas.width / 2;
+      this.y = gf.canvas.height / 2;
     }
   }
 }
