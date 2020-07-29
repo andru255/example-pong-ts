@@ -1,4 +1,4 @@
-import { KeyName, Keyboard } from "../../Keyboard";
+import { KeyName, Keyboard } from "@toolbox/Keyboard";
 import { GameFeatures } from "../../game";
 import Paddle from "@abstract/Paddle";
 import Ball from "./Ball";
@@ -10,9 +10,9 @@ export default class PlayerActor extends Paddle {
 
   constructor() {
     super();
-    this.x = 10;
+    this.x = 0;
     this.width = 50;
-    this.height = 120;
+    this.height = 100;
     this.vy = 0;
     this.friction = 0.85;
     this.accY = 2;

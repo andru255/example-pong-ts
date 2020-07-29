@@ -1,6 +1,6 @@
 import { GameFeatures } from "../game";
 
-export abstract class Layer {
+export default abstract class Layer {
   // position
   x: number = 0;
   y: number = 0;

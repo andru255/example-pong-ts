@@ -4,7 +4,7 @@ export default class EnemyActor extends Paddle {
   constructor() {
     super();
     this.width = 50;
-    this.height = 120;
+    this.height = 100;
     this.accY = 2;
     this.vy = 0;
     this.friction = 0.85;

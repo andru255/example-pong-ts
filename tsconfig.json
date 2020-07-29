@@ -10,7 +10,8 @@
     "typeRoots": ["./node_modules/@types", "./typings"],
     "baseUrl": ".",
     "paths": {
-      "@abstract/*": ["src/abstract/*"]
+      "@abstract/*": ["src/abstract/*"],
+      "@toolbox/*": ["src/toolbox/*"]
     }
   },
   "exclude": ["node_modules"]

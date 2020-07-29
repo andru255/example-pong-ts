@@ -1,9 +1,13 @@
 import { GameFeatures } from "../../game";
-import { Layer } from "@abstract/Layer";
-import { textFixture } from "../../Fixture";
-import Paddle from "../../abstract/Paddle";
-import Easing from "../../Easing";
-import Color, { linearColor, LiteralRGBA, isEqualToRGBA } from "../../Color";
+import Layer from "@abstract/Layer";
+import { textFixture } from "@toolbox/Fixture";
+import Paddle from "@abstract/Paddle";
+
+import Color, {
+  linearColor,
+  LiteralRGBA,
+  isEqualToRGBA,
+} from "../../toolbox/Color";
 
 export default class ScoreEnemyUI extends Layer {
   previusScore = 0;

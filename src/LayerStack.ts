@@ -1,4 +1,4 @@
-import { Layer } from "@abstract/Layer";
+import Layer from "@abstract/Layer";
 
 enum LayerStackState {
   Started,

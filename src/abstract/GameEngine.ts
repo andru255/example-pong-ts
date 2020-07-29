@@ -1,4 +1,4 @@
-import { Layer } from "@abstract/Layer";
+import Layer from "@abstract/Layer";
 import { LayerStack } from "../LayerStack";
 
 enum LoopStatus {

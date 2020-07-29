@@ -1,8 +1,8 @@
 import { GameFeatures } from "../../game";
-import { Layer } from "@abstract/Layer";
-import { textFixture } from "../../Fixture";
-import Color, { LiteralRGBA, linearColor, isEqualToRGBA } from "../../Color";
-import Paddle from "../../abstract/Paddle";
+import Layer from "@abstract/Layer";
+import { textFixture } from "@toolbox/Fixture";
+import Color, { LiteralRGBA, linearColor, isEqualToRGBA } from "@toolbox/Color";
+import Paddle from "@abstract/Paddle";
 
 export default class ScorePlayerUI extends Layer {
   previusScore = 0;

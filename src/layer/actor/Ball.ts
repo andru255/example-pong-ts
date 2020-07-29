@@ -1,13 +1,13 @@
-import { Layer } from "@abstract/Layer";
-import { rectangleFixture } from "../../Fixture";
+import Layer from "@abstract/Layer";
+import { rectangleFixture } from "@toolbox/Fixture";
 import Paddle from "@abstract/Paddle";
 
 export default class Ball extends Layer {
-  speed = 5;
-  speedRotation = 0.1;
+  speed = 7;
+  speedRotation = 0.2;
   constructor() {
     super();
-    this.radius = 20;
+    this.radius = 15;
     this.lineWidth = 1;
     this.fillStyle = "#65CBE2";
     this.bounce = -1;

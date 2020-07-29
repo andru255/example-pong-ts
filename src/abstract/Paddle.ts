@@ -1,5 +1,5 @@
-import { Layer } from "@abstract/Layer";
-import { rectangleFixture } from "../Fixture";
+import Layer from "@abstract/Layer";
+import { rectangleFixture } from "@toolbox/Fixture";
 import { GameFeatures } from "../game";
 import PaddleFillStyle from "../layer/effect/PaddleFillStyle";
 

@@ -23,6 +23,7 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
     alias: {
       "@abstract": path.resolve(__dirname, "src/abstract"),
+      "@toolbox": path.resolve(__dirname, "src/toolbox"),
     },
   },
   output: {
