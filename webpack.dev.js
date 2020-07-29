@@ -2,5 +2,10 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: "development",
+  devtool: "inline-source-map",
+  devServer: {
+    contentBase: "./lib",
+    port: 9000,
+  },
 });

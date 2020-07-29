@@ -1,7 +1,7 @@
 import { GameFeatures } from "../../game";
 import { Layer } from "../../abstract/layer";
 import { textFixture } from "../../Fixture";
-import Color, { LiteralRGBA, linearColor, isEqualToRGBA } from "../../../Color";
+import Color, { LiteralRGBA, linearColor, isEqualToRGBA } from "../../Color";
 import Paddle from "../../abstract/Paddle";
 
 export default class ScorePlayerUI extends Layer {
