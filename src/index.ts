@@ -1,5 +1,4 @@
 import BallActor from "./layer/actor/Ball";
-import ResultUI from "./layer/ui/ScorePlayer";
 import { Game } from "./game";
 import PlayerActor from "./layer/actor/Player";
 import EnemyActor from "./layer/actor/Enemy";
