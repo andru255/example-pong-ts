@@ -1,5 +1,5 @@
 import { GameFeatures } from "../../game";
-import Paddle from "../../abstract/Paddle";
+import Paddle from "@abstract/Paddle";
 export default class EnemyActor extends Paddle {
   constructor() {
     super();

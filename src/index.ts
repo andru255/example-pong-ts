@@ -1,10 +1,9 @@
-import BallActor from "./layer/actor/Ball";
 import { Game } from "./game";
+import BallActor from "./layer/actor/Ball";
 import PlayerActor from "./layer/actor/Player";
 import EnemyActor from "./layer/actor/Enemy";
 import ScorePlayerUI from "./layer/ui/ScorePlayer";
 import ScoreEnemyUI from "./layer/ui/ScoreEnemy";
-
 // actor layers
 const player = new PlayerActor();
 const ball = new BallActor();

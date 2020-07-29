@@ -1,6 +1,6 @@
 import { Layer } from "@abstract/Layer";
 import { rectangleFixture } from "../../Fixture";
-import Paddle from "../../abstract/Paddle";
+import Paddle from "@abstract/Paddle";
 
 export default class Ball extends Layer {
   speed = 5;

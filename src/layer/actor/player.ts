@@ -1,6 +1,6 @@
 import { KeyName, Keyboard } from "../../Keyboard";
 import { GameFeatures } from "../../game";
-import Paddle from "../../abstract/Paddle";
+import Paddle from "@abstract/Paddle";
 import Ball from "./Ball";
 
 export default class PlayerActor extends Paddle {
