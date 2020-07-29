@@ -1,5 +1,5 @@
 import { GameFeatures } from "../../game";
-import { Layer } from "@abstract/layer";
+import { Layer } from "@abstract/Layer";
 import { textFixture } from "../../Fixture";
 import Color, { LiteralRGBA, linearColor, isEqualToRGBA } from "../../Color";
 import Paddle from "../../abstract/Paddle";
